@@ -1,0 +1,140 @@
+body {  
+    min-height: 100vh;  
+    background-color: #2C2C2C; 
+    color: #FFD700;
+    display: flex;  
+    flex-direction: column;  
+}  
+
+header {  
+    background: #3E2723; 
+    padding: 20px;  
+    text-align: center;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+}  
+
+h1 {  
+    color: #FFD700; 
+    font-size: 2.5rem;  
+    animation: fadeIn 1s ease-in-out;  
+}  
+
+nav ul {  
+    list-style-type: none;  
+    padding: 0;  
+}  
+
+nav ul li {  
+    display: inline;  
+}  
+
+nav ul a {  
+    padding: 15px 20px;  
+    text-decoration: none;  
+    color: #FFD700; 
+    transition: background 0.3s, transform 0.3s;  
+}  
+
+nav ul a:hover {  
+    background-color: #D4AF37;
+    transform: scale(1.1);  
+}  
+
+main {  
+    flex: 1;  
+    padding: 20px;  
+    display: flex;  
+    flex-direction: column;  
+    justify-content: space-between;  
+}  
+
+.items {  
+    display: grid;  
+    grid-template-columns: repeat(3, 1fr);  
+    gap: 20px;  
+    width: 100%;  
+    padding: 20px;  
+    flex: 1;  
+}  
+
+.item {  
+    background-color: #3E2723; 
+    border-radius: 10px;  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+    overflow: hidden;  
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: highlightBorder 1.5s ease-out forwards;   
+}  
+
+.item:hover {  
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7); 
+}  
+
+.item img {  
+    width: 100%;  
+    height: 200px;  
+    object-fit: cover;  
+    display: block;  
+}  
+
+.item h4 {  
+    padding: 10px;  
+    text-align: center;  
+    margin: 0;  
+}  
+
+.item button {  
+    padding: 10px 20px;  
+    border-radius: 5px;  
+    border: none;  
+    background-color: #D4AF37;
+    color: black;  
+    cursor: pointer;  
+    font-size: 18px;  
+    margin: 10px;  
+    display: block;  
+    width: calc(100% - 20px);  
+}  
+
+.item button:hover {  
+    background-color: #FFD700; 
+}  
+
+footer {  
+    text-align: center;  
+    padding: 20px;  
+    background-color: #3E2723;  
+    color: #FFD700;  
+}  
+
+@keyframes fadeIn {  
+    from {  
+        opacity: 0;  
+    }  
+    to {  
+        opacity: 1;  
+    }  
+}  
+
+
+@keyframes highlightBorder {
+    0% {
+        border: 5px solid transparent; 
+    }
+    100% {
+        border: 5px solid #FFD700; 
+    }
+}
+
+@media screen and (max-width: 1024px) {  
+    .items {  
+        grid-template-columns: repeat(2, 1fr);  
+    }  
+}  
+
+@media screen and (max-width: 768px) {  
+    .items {  
+        grid-template-columns: repeat(1, 1fr);  
+    }  
+}  

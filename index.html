@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar/Registro</title>
+    <link rel="stylesheet" href="menu.css">
+    <link rel="icon" href="RS.jpg" type="image/icon type">
+    <style>
+        
+        .auto-type {
+            font-size: 300px;
+            font-weight: bold;
+            color: rgb(255, 0, 0);
+            border-right: 3px solid rgb(255, 0, 0);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 1s steps(40) 1s forwards, blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 300px; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: rgb(255, 0, 0); }
+            50% { border-color: rgb(255, 0, 0); }
+        }
+
+        
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content h3 {
+            color: rgb(255, 0, 0);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input[type="email"],
+        .modal-content input[type="submit"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid rgb(255, 0, 0);
+            font-size: 16px;
+        }
+
+        .modal-content input[type="submit"] {
+            background-color: rgb(255, 0, 0);
+            color: rgb(255, 0, 0);
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal-content input[type="submit"]:hover {
+            background-color: rgb(255, 0, 0);
+        }
+
+        .close {
+            color: #ff0000;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+       
+        .formbx {
+            z-index: 1;
+            position: relative;
+        }
+
+        
+        #signupSuccess {
+            background-color: rgb(255, 255, 255);
+            color: rgb(255, 0, 0);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+       
+        #signupSuccess .signinbtn {
+            background: linear-gradient(90deg, rgb(255, 0, 0) 0%, rgb(0, 0, 0) 100%);
+            color: rgb(255, 0, 0);
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0px 4px 15px rgb(255, 0, 0);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        #signupSuccess .signinbtn:hover {
+            background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(255, 0, 0) 100%);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loginbg">
+            <div class="box signin">
+                <h2>Já possui uma conta?</h2>
+                <button class="signinbtn" onclick="showLoginForm()">Entrar</button>
+            </div>
+            <div class="box signup">
+                <h2>Não possui uma conta?</h2>
+                <button class="signupbtn" onclick="showSignupForm()">Criar Conta</button>
+            </div>
+        </div>
+        <div class="formbx">
+           
+            <div class="form signinform">
+                <form id="loginForm">
+                    <h2 class="auto-type">CASA DA BEBIDA</h2>
+                    <h3>Entrar</h3>
+                    <input type="text" id="loginUsername" placeholder="Usuário" required>
+                    <input type="password" id="loginPassword" placeholder="Senha" required>
+                    <input type="submit" value="Login">
+                    <a href="#" class="forgot" id="forgotPassword">Esqueceu a senha</a>
+                </form>
+                <p id="loginError" style="color:red; display:none;">Usuário ou senha incorretos. Por favor, tente novamente.</p>
+            </div>
+
+          
+            <div class="form signupform">
+                <form id="signupForm">
+                    <h3>Conecte-se</h3>
+                    <input type="text" id="signupUsername" placeholder="Informe seu nome de usuário" required>
+                    <input type="email" id="signupEmail" placeholder="Email" required>
+                    <input type="password" id="signupPassword" placeholder="Senha" required>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirme a senha" required>
+                    <input type="submit" value="Cadastrar">
+                </form>
+                <div id="signupSuccess" style="display:none;">
+                    <h3>Conta criada com sucesso!</h3>
+                    <button class="signinbtn" onclick="showLoginForm()">Clique aqui para fazer login</button>
+                </div>
+                <p id="signupError" style="color:red; display:none;">As senhas não correspondem. Por favor, tente novamente.</p>
+            </div>
+        </div>
+    </div>
+
+   
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="RS.jpg" alt="Esqueceu a Senha">
+            <h3>Esqueceu a Senha</h3>
+            <form id="forgotPasswordForm">
+                <input type="email" placeholder="Digite seu email" required>
+                <input type="submit" value="Enviar">
+            </form>
+            <div id="emailSentMessage" style="display:none;">
+                <h3>Instruções enviadas para o email</h3>
+            </div>
+        </div>
+    </div>
+    <script>
+       
+        function showLoginForm() {
+            document.querySelector('.formbx').classList.remove('active');
+        }
+    
+        function showSignupForm() {
+            document.querySelector('.formbx').classList.add('active');
+        }
+    
+       
+        document.getElementById('signupForm').onsubmit = function(event) {
+            event.preventDefault();
+            const username = document.getElementById('signupUsername').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+    
+            if (password === confirmPassword) {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                const userExists = users.some(user => user.username === username);
+    
+                if (!userExists) {
+                    users.push({ username, email, password });
+                    localStorage.setItem('users', JSON.stringify(users));
+                    document.getElementById('signupForm').style.display = 'none';
+                    document.getElementById('signupSuccess').style.display = 'block';
+                } else {
+                    alert("Usuário já existe!");
+                }
+            } else {
+                document.getElementById('signupError').style.display = 'block';
+            }
+        };
+    
+        
+        document.getElementById('loginForm').onsubmit = function(event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+    
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => user.username === username && user.password === password);
+    
+            if (user) {
+                alert("Login bem-sucedido!");
+                window.location.href = "menu.html"; 
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>
